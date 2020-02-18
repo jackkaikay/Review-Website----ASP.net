@@ -44,7 +44,12 @@
             @Html.DisplayFor(modelItem => item.FilmReleaseDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FilmImage)
+            @if (item.FilmImage != null)
+            {
+
+                <img src="@Url.Content(item.FilmImage)" width="100" />
+            }
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.FilmID }) |

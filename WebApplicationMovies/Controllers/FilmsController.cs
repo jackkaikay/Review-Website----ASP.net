@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,31 @@ namespace WebApplicationMovies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FilmID,FilmTitle,FilmGenre,FilmDesc,FilmReleaseDate,FilmImage")] Film film)
+        public ActionResult Create([Bind(Include = "FilmID,FilmTitle,FilmGenre," +
+            "FilmDesc,FilmReleaseDate,FilmImage")] Film film, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    if (upload.ContentType == "image/jpeg" ||
+                        upload.ContentType == "image/jpg"||
+                        upload.ContentType == "image/gif" ||
+                        upload.ContentType == "image/png" )
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Content/Images"),
+                                      Path.GetFileName(upload.FileName));
+                                       
+                        upload.SaveAs(path);
+
+                        film.FilmImage = "~/Content/Images/" +
+                            Path.GetFileName(upload.FileName);
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Not valid image format";
+                    }
+                }
                 db.Films.Add(film);
                 db.SaveChanges();
                 return RedirectToAction("Index");

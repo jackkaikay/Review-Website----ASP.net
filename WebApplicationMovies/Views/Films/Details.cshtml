@@ -47,7 +47,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FilmImage)
+            @if (Model.FilmImage != null)
+            {
+                <img src="@Url.Content(Model.FilmImage)" width="100" />
+            }
+
         </dd>
 
     </dl>
