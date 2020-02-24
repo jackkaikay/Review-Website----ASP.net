@@ -14,12 +14,15 @@ namespace WebApplicationMovies.Controllers
     public class FilmsController : Controller
     {
         private DBContext db = new DBContext();
+         
 
         // GET: Films
         public ActionResult Index()
         {
             return View(db.Films.ToList());
         }
+         
+
 
         // GET: Films/Details/5
         public ActionResult Details(int? id)
