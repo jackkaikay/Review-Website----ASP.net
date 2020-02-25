@@ -140,7 +140,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBContext.cs" />
-    <Compile Include="Models\EntriesController.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Models\Film.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
