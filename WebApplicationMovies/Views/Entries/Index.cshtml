@@ -35,10 +35,13 @@
             @Html.DisplayFor(modelItem => item.EntrySname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EntryDesc)
+            @Html.DisplayFor(modelItem => item.EntryDescTrimmed)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EntryImage)
+            @if (item.EntryImage != null)
+            {
+                <img src="@Url.Content(item.EntryImage)" width="100" /> 
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.EntryID }) |
