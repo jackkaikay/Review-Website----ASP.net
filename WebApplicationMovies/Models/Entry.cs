@@ -7,49 +7,51 @@ using System.Web;
 
 namespace WebApplicationMovies.Models
 {
+
     [Table("ENTRY")]
     public class Entry
     {
 
- 
         [Column("entry_id")]
+        [Display(Name = "ID")]
         public int EntryID { get; set; }
 
         [Required]
         [Column("entry_fname")]
-        [Display(Name = "First Name")]
+        [Display(Name = "Title")]
         public string EntryFname { get; set; }
 
         [Required]
         [Column("entry_sname")]
-        [Display(Name = "Surname")]
+        [Display(Name = "Genre")]
         public string EntrySname { get; set; }
 
         [Required]
-        [Display(Name = "Bio")]
-        [DataType(DataType.MultilineText)]
         [Column("entry_desc")]
+        [Display(Name = "Description")]
+        [DataType(DataType.MultilineText)]
         public string EntryDesc { get; set; }
 
         [Column("entry_img")]
-        [Display(Name = "Profile Image")]
+        [Display(Name = "Image")]
         public string EntryImage { get; set; }
 
 
 
         public string EntryDescTrimmed
+
         {
             get
             {
-
-                if ((EntryDesc.Length) > 100)
+                if ((EntryDesc.Length > 100))
 
                     return EntryDesc.Substring(0, 100) + "...";
                 else
-                    return EntryDesc; 
+                    return EntryDesc;
+
+
+                    
             }
         }
-
-  
     }
 }

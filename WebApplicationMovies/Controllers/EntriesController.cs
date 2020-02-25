@@ -1,8 +1,7 @@
-﻿sing System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,7 +17,7 @@ namespace WebApplicationMovies.Controllers
         // GET: Entries
         public ActionResult Index()
         {
-            return View(db.Entrys.ToList());
+            return View(db.Entries.ToList());
         }
 
         // GET: Entries/Details/5
@@ -28,7 +27,7 @@ namespace WebApplicationMovies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Entry entry = db.Entrys.Find(id);
+            Entry entry = db.Entries.Find(id);
             if (entry == null)
             {
                 return HttpNotFound();
@@ -47,32 +46,11 @@ namespace WebApplicationMovies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EntryId,EntryFname,EntrySname," +
-            "EntryDesc,EntryImage")] Entry entry, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "EntryID,EntryFname,EntrySname,EntryDesc,EntryImage")] Entry entry)
         {
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    if (upload.ContentType == "image/jpeg" ||
-                        upload.ContentType == "image/jpg" ||
-                        upload.ContentType == "image/gif" ||
-                        upload.ContentType == "image/png")
-                    {
-                        string path = Path.Combine(Server.MapPath("~/Content/Images"),
-                                      Path.GetFileName(upload.FileName));
-
-                        upload.SaveAs(path);
-
-                        entry.EntryImage = "~/Content/Images/" +
-                            Path.GetFileName(upload.FileName);
-                    }
-                    else
-                    {
-                        ViewBag.Message = "Not valid image format";
-                    }
-                }
-                db.Entrys.Add(entry);
+                db.Entries.Add(entry);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -87,7 +65,7 @@ namespace WebApplicationMovies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Entry entry = db.Entrys.Find(id);
+            Entry entry = db.Entries.Find(id);
             if (entry == null)
             {
                 return HttpNotFound();
@@ -100,36 +78,14 @@ namespace WebApplicationMovies.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EntryId,EntryFname,EntrySname," +
-            "EntryDesc,EntryImage")] Entry entry, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "EntryID,EntryFname,EntrySname,EntryDesc,EntryImage")] Entry entry)
         {
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
-                {
-                    if (upload.ContentType == "image/jpeg" ||
-                        upload.ContentType == "image/jpg" ||
-                        upload.ContentType == "image/gif" ||
-                        upload.ContentType == "image/png")
-                    {
-                        string path = Path.Combine(Server.MapPath("~/Content/Images"),
-                                      Path.GetFileName(upload.FileName));
-
-                        upload.SaveAs(path);
-
-                        entry.EntryImage = "~/Content/Images/" +
-                            Path.GetFileName(upload.FileName);
-                    }
-                    else
-                    {
-                        ViewBag.Message = "Not valid image format";
-                    }
-                }
-                db.Entrys.Add(entry);
+                db.Entry(entry).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(entry);
         }
 
@@ -140,7 +96,7 @@ namespace WebApplicationMovies.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Entry entry = db.Entrys.Find(id);
+            Entry entry = db.Entries.Find(id);
             if (entry == null)
             {
                 return HttpNotFound();
@@ -153,8 +109,8 @@ namespace WebApplicationMovies.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Entry entry = db.Entrys.Find(id);
-            db.Entrys.Remove(entry);
+            Entry entry = db.Entries.Find(id);
+            db.Entries.Remove(entry);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
