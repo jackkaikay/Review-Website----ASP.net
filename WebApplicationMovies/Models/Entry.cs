@@ -33,7 +33,7 @@ namespace WebApplicationMovies.Models
 
         [Column("entry_img")]
         [Display(Name = "Profile Image")]
-        public string EntrImage { get; set; }
+        public string EntryImage { get; set; }
 
 
 
@@ -50,5 +50,6 @@ namespace WebApplicationMovies.Models
             }
         }
 
+  
     }
 }
