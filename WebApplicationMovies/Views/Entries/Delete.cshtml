@@ -40,7 +40,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EntryImage)
+            @if (Model.EntryImage != null)
+            {
+                <img src="@Url.Content(Model.EntryImage)" width="100" /> 
+            }
         </dd>
 
     </dl>
