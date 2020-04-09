@@ -54,23 +54,6 @@ namespace WebApplicationMovies.Controllers
 
 
 
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // GET: Actings/Details/5
         public ActionResult Details(int? id)
         {
@@ -87,10 +70,51 @@ namespace WebApplicationMovies.Controllers
         }
 
         // GET: Actings/Create
-        public ActionResult Create()
+        public ActionResult Create(int FilmId = 0, int EntryId = 0)
         {
+            var filmQuery = from m in db.Films
+                orderby m.FilmTitle 
+                select m;
+
+            if (FilmId == 0)
+                ViewBag.FilmId = new SelectList(filmQuery, "FilmID",
+                                                "FilmTitle", FilmId);
+
+
+            var personsQuery = from p in db.Entries
+                               orderby p.EntrySname
+                               select new
+                               {
+                                   Name = p.EntryFname + " " + p.EntrySname,
+                                   p.EntryID
+                               };
+
+                                if (EntryId == 0) 
+                                
+                                ViewBag.EntryId = new SelectList(personsQuery, "PersonId",
+                                                "Name", null);
+
+                                else 
+                                
+                                    ViewBag.EntryId = new SelectList(personsQuery, "PersonId",
+                                                "Name", EntryId);
+
             return View();
         }
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // POST: Actings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
