@@ -78,7 +78,11 @@ namespace WebApplicationMovies.Controllers
 
             if (FilmId == 0)
                 ViewBag.FilmId = new SelectList(filmQuery, "FilmID",
+                                                "FilmTitle", null);
+            else
+                ViewBag.FilmId = new SelectList(filmQuery, "FilmID",
                                                 "FilmTitle", FilmId);
+
 
 
             var personsQuery = from p in db.Entries
@@ -91,12 +95,12 @@ namespace WebApplicationMovies.Controllers
 
                                 if (EntryId == 0) 
                                 
-                                ViewBag.EntryId = new SelectList(personsQuery, "PersonId",
+                                ViewBag.EntryId = new SelectList(personsQuery, "EntryId",
                                                 "Name", null);
 
                                 else 
                                 
-                                    ViewBag.EntryId = new SelectList(personsQuery, "PersonId",
+                                    ViewBag.EntryId = new SelectList(personsQuery, "EntryId",
                                                 "Name", EntryId);
 
             return View();
