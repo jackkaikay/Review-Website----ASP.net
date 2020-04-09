@@ -1,5 +1,4 @@
-﻿@model IEnumerable<WebApplicationMovies.Models.Acting>
-
+﻿@model IEnumerable<WebApplicationMovies.Models.ViewModels.ActingListViewModel>
 @{
     ViewBag.Title = "Index";
 }
@@ -12,28 +11,61 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PersonId)
+            @Html.DisplayNameFor(model => model.Film.FilmTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FilmId)
+            @Html.DisplayNameFor(model => model.Film.FilmImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actor.EntryFname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actor.EntrySname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actor.EntryImage)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model) 
+{
     <tr>
+        <th>
+            @Html.DisplayFor(modelItem => item.Film.FilmTitle)
+        </th>
+
+        <th>
+            @if (item.Film.FilmImage != null)
+            {
+                <img src="Url.Content(item.Film.FilmImage)" width="100" />
+            }
+        </th>
+
+        <th>
+            @Html.DisplayFor(ModelItem => item.Actor.EntryFname)
+        </th>
+
+        <th>
+            @Html.DisplayFor(ModelItem => item.Actor.EntrySname)
+        </th>
+
+        <th>
+            @if (item.Actor.EntryImage != null)
+            {
+                <img src="@Url.Content(item.Actor.EntryImage)" width="100"  />
+            }
+        </th>
+
         <td>
-            @Html.DisplayFor(modelItem => item.PersonId)
+            @Html.ActionLink("Edit", "Edit", new { id = item.ActingCredit.ActingId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ActingCredit.ActingId }) 
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FilmId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ActingId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ActingId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ActingId })
-        </td>
-    </tr>
+       </tr>
 }
+
+
+
+
 
 </table>
