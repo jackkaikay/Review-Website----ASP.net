@@ -133,6 +133,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActingsController.cs" />
     <Compile Include="Controllers\EntriesController.cs" />
     <Compile Include="Controllers\FilmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -194,6 +195,11 @@
     <Content Include="Views\Entries\Details.cshtml" />
     <Content Include="Views\Entries\Edit.cshtml" />
     <Content Include="Views\Entries\Index.cshtml" />
+    <Content Include="Views\Actings\Create.cshtml" />
+    <Content Include="Views\Actings\Delete.cshtml" />
+    <Content Include="Views\Actings\Details.cshtml" />
+    <Content Include="Views\Actings\Edit.cshtml" />
+    <Content Include="Views\Actings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
