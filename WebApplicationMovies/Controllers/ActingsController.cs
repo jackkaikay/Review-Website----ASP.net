@@ -149,8 +149,31 @@ namespace WebApplicationMovies.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Film dropdowns 
+
+            var filmQuery = from m in db.Films
+                            orderby m.FilmTitle
+                            select m;
+
+            ViewBag.FilmId = new SelectList(filmQuery, "FilmID",
+                                            "FilmTitle", acting.FilmId);
+
+
+
+
+
             return View(acting);
         }
+
+
+        //Film dropdowns 
+
+       
+
+
+
+
 
         // POST: Actings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
